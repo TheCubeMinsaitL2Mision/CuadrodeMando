@@ -394,6 +394,7 @@
   .pm-val { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--black); display: flex; align-items: center; gap: 5px; }
   .delta { font-size: 10px; }
   .pm-kpi-row { background: var(--gray-50); border-radius: 4px; margin: 0 -4px; padding-left: 4px !important; padding-right: 4px !important; }
+  .pm-kpi-row-center { justify-content: center !important; gap: 8px; }
   .pm-prog { font-family: var(--mono); font-size: 9px; color: var(--minsait); letter-spacing: -.02em; }
   .d-up { color: var(--green); }
   .d-dn { color: var(--amber); }
@@ -872,13 +873,11 @@
       <option value="territorial">Comparativa territorial</option>
     </select>
   </div>
-  <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
-    <button class="filter-reset" style="margin-left:0" onclick="resetCommunicationFilters()">↺ Restablecer filtros</button>
-    <button class="download-btn" id="download-btn-comm" onclick="downloadReportComm()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Descargar informe
-    </button>
-  </div>
+  <button class="filter-reset" onclick="resetCommunicationFilters()">↺ Restablecer filtros</button>
+  <button class="download-btn" id="download-btn-comm" onclick="downloadReportComm()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Descargar informe
+  </button>
 </div>
 
 <!-- SEGUIMIENTO CONTRACTUAL FILTER BAR -->
@@ -918,13 +917,11 @@
       <option value="alertas">Alertas</option>
     </select>
   </div>
-  <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
-    <button class="filter-reset" style="margin-left:0" onclick="resetSeguimientoFilters()">↺ Restablecer filtros</button>
-    <button class="download-btn" id="download-btn-sc" onclick="downloadReportSC()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Descargar informe
-    </button>
-  </div>
+  <button class="filter-reset" onclick="resetSeguimientoFilters()">↺ Restablecer filtros</button>
+  <button class="download-btn" id="download-btn-sc" onclick="downloadReportSC()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Descargar informe
+  </button>
 </div>
 
 <!-- SEGUIMIENTO CONTRACTUAL CONTENT -->
@@ -1177,7 +1174,7 @@
         </div>
         <div class="entregable-row">
           <div class="a-dot" style="background:var(--green)"></div>
-          <div class="e-name"><span class="e-id">E02bis</span> Propuesta nuevos Centros Misión</div>
+          <div class="e-name"><span class="e-id">E02</span> Propuesta nuevos Centros Misión</div>
           <div class="e-fecha">Entregado mes 3</div>
           <span class="e-estado es-rev">En revisión</span>
         </div>
@@ -1421,7 +1418,7 @@
         <div class="pm-row"><span class="pm-lbl">Noticias publicadas</span><span class="pm-val">38</span></div>
         <div class="pm-row"><span class="pm-lbl">Eventos cargados</span><span class="pm-val">21</span></div>
         <div class="pm-row"><span class="pm-lbl">Audiovisuales</span><span class="pm-val">14</span></div>
-        <div class="pm-row pm-kpi-row"><span class="pm-lbl">Incidencias abiertas</span><span class="pm-val" style="color:var(--amber)">2 <span class="delta d-dn">▲</span></span></div>
+        <div class="pm-row"><span class="pm-lbl">Incidencias abiertas</span><span class="pm-val" style="color:var(--amber)">2 <span class="delta d-dn">▲</span></span></div>
       </div>
       <div class="prog-card">
         <div class="prog-card-hdr">
@@ -1434,7 +1431,7 @@
         <div class="pm-row"><span class="pm-lbl">Piezas revisadas</span><span class="pm-val">67</span></div>
         <div class="pm-row"><span class="pm-lbl">Conformes</span><span class="pm-val" style="color:var(--green)">61</span></div>
         <div class="pm-row"><span class="pm-lbl">Incidencias</span><span class="pm-val" style="color:var(--amber)">4</span></div>
-        <div class="pm-row pm-kpi-row"><span class="pm-lbl">Pendientes validación</span><span class="pm-val" style="color:var(--amber)">2</span></div>
+        <div class="pm-row"><span class="pm-lbl">Pendientes validación</span><span class="pm-val" style="color:var(--amber)">2</span></div>
       </div>
       <div class="prog-card">
         <div class="prog-card-hdr">
@@ -1447,7 +1444,7 @@
         <div class="pm-row"><span class="pm-lbl">Publicaciones</span><span class="pm-val">143</span></div>
         <div class="pm-row"><span class="pm-lbl">Alcance total</span><span class="pm-val">108K</span></div>
         <div class="pm-row"><span class="pm-lbl">Clics</span><span class="pm-val">6.2K</span></div>
-        <div class="pm-row pm-kpi-row"><span class="pm-lbl">Engagement medio</span><span class="pm-val" style="color:var(--green)">5.9%</span></div>
+        <div class="pm-row"><span class="pm-lbl">Engagement medio</span><span class="pm-val" style="color:var(--green)">5.9%</span></div>
       </div>
       <div class="prog-card">
         <div class="prog-card-hdr">
@@ -1460,7 +1457,7 @@
         <div class="pm-row"><span class="pm-lbl">Miembros activos</span><span class="pm-val">1.248</span></div>
         <div class="pm-row"><span class="pm-lbl">Comunicaciones env.</span><span class="pm-val">312</span></div>
         <div class="pm-row"><span class="pm-lbl">Interacciones</span><span class="pm-val">4.1K</span></div>
-        <div class="pm-row pm-kpi-row"><span class="pm-lbl">Crecimiento</span><span class="pm-val" style="color:var(--green)">+18% <span class="delta d-up">▲</span></span></div>
+        <div class="pm-row"><span class="pm-lbl">Crecimiento</span><span class="pm-val" style="color:var(--green)">+18% <span class="delta d-up">▲</span></span></div>
       </div>
       <div class="prog-card">
         <div class="prog-card-hdr">
@@ -1473,7 +1470,7 @@
         <div class="pm-row"><span class="pm-lbl">Contactos</span><span class="pm-val">3.847</span></div>
         <div class="pm-row"><span class="pm-lbl">Segmentos activos</span><span class="pm-val">12</span></div>
         <div class="pm-row"><span class="pm-lbl">Campañas enviadas</span><span class="pm-val">18</span></div>
-        <div class="pm-row pm-kpi-row"><span class="pm-lbl">Tasa apertura email</span><span class="pm-val" style="color:var(--amber)">24.3%</span></div>
+        <div class="pm-row"><span class="pm-lbl">Tasa apertura email</span><span class="pm-val" style="color:var(--amber)">24.3%</span></div>
       </div>
     </div>
   </div>
@@ -2479,7 +2476,7 @@ function renderPrograms(p) {
     <div class="prog-card">
       <div class="prog-card-hdr"><div class="prog-icon pi-inv">💰</div><div class="prog-card-title">Inversión y Financiación</div></div>
       <div>
-        <div class="pm-row pm-kpi-row"><span class="pm-lbl">Startups en plataforma</span><span class="pm-val"><strong>${inv.plataforma}</strong> <span class="pm-prog">${iBar} ${inv.plataforma}/60</span></span></div>
+        <div class="pm-row" style="background:var(--gray-50)"><span class="pm-lbl">Startups en plataforma</span><span class="pm-val"><strong>${inv.plataforma}</strong> <span class="pm-prog">${iBar} ${inv.plataforma}/60</span></span></div>
         <div class="pm-row"><span class="pm-lbl">Reuniones startup–inversor</span><span class="pm-val">${inv.reuniones} <span class="delta d-ref">/ 100 red</span></span></div>
         <div class="pm-row"><span class="pm-lbl">Foros de inversión</span><span class="pm-val">${inv.foros} <span class="delta d-ref">/ 16 red</span></span></div>
         <div class="pm-row"><span class="pm-lbl">Rondas abiertas</span><span class="pm-val">${inv.rondas}</span></div>
@@ -2490,7 +2487,7 @@ function renderPrograms(p) {
     <div class="prog-card">
       <div class="prog-card-hdr"><div class="prog-icon pi-com">🌐</div><div class="prog-card-title">Activación y Comunidad</div></div>
       <div>
-        <div class="pm-row pm-kpi-row"><span class="pm-lbl">Contactos comerciales cualif.</span><span class="pm-val"><strong>${com.contactos}</strong> <span class="pm-prog">${cBar} ${com.contactos}/120</span></span></div>
+        <div class="pm-row" style="background:var(--gray-50)"><span class="pm-lbl">Contactos comerciales cualif.</span><span class="pm-val"><strong>${com.contactos}</strong> <span class="pm-prog">${cBar} ${com.contactos}/120</span></span></div>
         <div class="pm-row"><span class="pm-lbl">Eventos comunidad (IA07)</span><span class="pm-val">${com.eventos}</span></div>
         <div class="pm-row"><span class="pm-lbl">Alianzas activas (IR08)</span><span class="pm-val">${com.alianzas} <span class="delta d-ref">/ 80 red</span></span></div>
         <div class="pm-row"><span class="pm-lbl">Acciones con socio local</span><span class="pm-val">${com.socio}</span></div>
@@ -2995,7 +2992,7 @@ function renderCommunicationView() {
         <div><div class="prog-card-title">${c.title}</div><div style="font-size:10px;color:var(--gray-500)">${c.sub}</div></div>
       </div>
       ${c.rows.map(([l,v])=>`<div class="pm-row"><span class="pm-lbl">${l}</span><span class="pm-val">${v}</span></div>`).join('')}
-      <div class="pm-row pm-kpi-row"><span class="pm-lbl">${c.kpi[0]}</span><span class="pm-val" style="color:${kValColor}">${c.kpi[1]}</span></div>
+      <div class="pm-row" style="background:var(--gray-50)"><span class="pm-lbl">${c.kpi[0]}</span><span class="pm-val" style="color:${kValColor}">${c.kpi[1]}</span></div>
     </div>`;
   }).join('');
   const canalCols = canal === 'all' ? 5 : 1;
@@ -3309,7 +3306,7 @@ const SC_MATRIZ = {
 // Entregables contractuales
 const SC_ENTREGABLES = [
   { id:'E02',    nombre:'Metodología detallada',           period:'Día 30',       fecha:'30 ene 2025', estado:'validado', validacion:'ok',  evidencias:'ok',  impacto:'OK',                     centro:'all', prog:'all'    },
-  { id:'E02bis', nombre:'Nuevos Centros Misión',           period:'Mes 3',        fecha:'28 feb 2025', estado:'validado', validacion:'ok',  evidencias:'ok',  impacto:'Cerrado',                centro:'all', prog:'all'    },
+  { id:'E02', nombre:'Nuevos Centros Misión',           period:'Mes 3',        fecha:'28 feb 2025', estado:'validado', validacion:'ok',  evidencias:'ok',  impacto:'Cerrado',                centro:'all', prog:'all'    },
   { id:'E03',    nombre:'Informe mensual de actividad',    period:'Mensual',      fecha:'30 may 2025', estado:'en-curso', validacion:'pen', evidencias:'pen', impacto:'Próximo hito',           centro:'all', prog:'all'    },
   { id:'E04',    nombre:'Informe trimestral seguimiento',  period:'Trimestral',   fecha:'30 jun 2025', estado:'planif',   validacion:'pen', evidencias:'pen', impacto:'Pendiente batch',        centro:'all', prog:'all'    },
   { id:'E05',    nombre:'Progreso de startups',            period:'Cierre edición',fecha:'Jul 2025',   estado:'en-curso', validacion:'pen', evidencias:'par', impacto:'Facturación condicionada',centro:'all',prog:'acelera'},
@@ -3540,7 +3537,7 @@ function renderSeguimiento() {
   const entHTML2 = entFilt.length===0
     ? '<div style="padding:16px;text-align:center;color:var(--gray-400);font-size:12px">Sin entregables para los filtros seleccionados</div>'
     : entFilt.map(e =>
-        `<div class="comm-row" style="grid-template-columns:55px 2fr 100px 110px 100px 100px 1fr">
+        `<div class="comm-row" style="grid-template-columns:55px 2fr 100px 110px 100px 130px 1.2fr">
           <span class="e-id">${e.id}</span>
           <span style="font-weight:500;color:var(--black)">${e.nombre}</span>
           <span style="font-size:10px;color:var(--gray-500)">${e.period}</span>
@@ -3679,7 +3676,7 @@ function renderSeguimiento() {
     <div>
       <div class="section-head"><div class="section-num">${snum()}</div><div class="section-title">Entregables contractuales y evidencias</div><div class="section-line"></div></div>
       <div class="comm-tbl">
-        <div class="comm-row hdr" style="grid-template-columns:55px 2fr 100px 110px 100px 100px 1fr">
+        <div class="comm-row hdr" style="grid-template-columns:55px 2fr 100px 110px 100px 130px 1.2fr">
           <span>ID</span><span>Entregable</span><span>Periodicidad</span><span>Fecha prevista</span><span>Estado</span><span>Validación / Evidencia</span><span>Impacto contractual</span>
         </div>
         ${entHTML2}
