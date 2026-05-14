@@ -3388,11 +3388,12 @@ function renderSeguimiento() {
   const ragC = (v,o) => { const r=ragOf(v,o); return `<span class="rag ${rdCls(r)}"></span>`; };
   const icCls= r => r==='g'?'ic-green':r==='a'?'ic-amber':'ic-red';
   const vcCls= r => r==='g'?'green':r==='a'?'amber':'red';
-  const kpiCard = (id,val,obj,lbl,r) =>
+  const kpiCard = (id,val,obj,lbl,r,ctx) =>
     `<div class="ind-card ${icCls(r)}">
       <div class="ind-id">${id} <span class="rag ${rdCls(r)}"></span></div>
       <div class="ind-val ${vcCls(r)}">${val}</div>
-      <div class="ind-obj">obj: ${obj}</div>
+      ${ctx ? `<div class="ind-obj">${ctx}</div>` : ''}
+      ${obj ? `<div class="ind-obj">obj: ${obj}</div>` : ''}
       <div class="ind-lbl">${lbl}</div>
     </div>`;
 
@@ -3438,22 +3439,20 @@ function renderSeguimiento() {
 
   // ── KPIs HTML ──
   const kpisEcon = [
-    kpiCard('CONT·01', eur(totalPrev),    eur(totalPrev),   'Presupuesto previsto',         'g'),
-    kpiCard('CONT·02', eur(totalEjec),    eur(totalPrev),   'Presupuesto ejecutado',        ragOf(pctEjec,38)===  'g'?'g':ragOf(pctEjec,30)==='g'?'a':'r'),
-    kpiCard('CONT·03', eur(totalPend),    eur(totalPrev),   'Presupuesto pendiente',        'g'),
-    kpiCard('CONT·04', pctEjec+'%',       '40%',            '% ejecución económica',        ragOf(pctEjec,38)),
-    kpiCard('CONT·05', fmtH(totalHPlan),  fmtH(totalHPlan), 'Horas planificadas',           'g'),
-    kpiCard('CONT·06', fmtH(totalHImp),   fmtH(totalHPlan), 'Horas imputadas',              r_horas),
-    kpiCard('CONT·07', (desvHoras>0?'+':'')+fmtH(desvHoras),'0h', 'Desviación de horas',   r_horas),
-    kpiCard('CONT·08', centrosDesv+'/4',  '0',              'Centros con desviación',       centrosDesv===0?'g':centrosDesv<=1?'a':'r'),
-    kpiCard('CONT·09', progsDesv+'/'+presFilt.filter(x=>x.id!=='total').length, '0', 'Programas con desviación', progsDesv===0?'g':progsDesv<=2?'a':'r'),
+    kpiCard('CONT·01', eur(totalEjec),    '',               'Presupuesto ejecutado',        ragOf(pctEjec,38)===  'g'?'g':ragOf(pctEjec,30)==='g'?'a':'r', 'Presupuesto previsto: 1.24M€'),
+    kpiCard('CONT·02', eur(totalPend),    '',               'Presupuesto pendiente',        'g'),
+    kpiCard('CONT·03', pctEjec+'%',       '',               '% ejecución económica',        ragOf(pctEjec,38)),
+    kpiCard('CONT·04', fmtH(totalHImp),   '',               'Horas imputadas',              r_horas, 'Horas planificadas: 8.780h'),
+    kpiCard('CONT·05', (desvHoras>0?'+':'')+fmtH(desvHoras),'0h', 'Desviación de horas',   r_horas),
+    kpiCard('CONT·06', centrosDesv+'/4',  '0',              'Centros con desviación',       centrosDesv===0?'g':centrosDesv<=1?'a':'r'),
+    kpiCard('CONT·07', progsDesv+'/'+presFilt.filter(x=>x.id!=='total').length, '0', 'Programas con desviación', progsDesv===0?'g':progsDesv<=2?'a':'r'),
   ];
   const kpisGest = [
-    kpiCard('CONT·10', entProximos+'',    '0',              'Entregables próximos/en curso', entProximos<=1?'g':entProximos<=3?'a':'r'),
-    kpiCard('CONT·11', entValidados+'',   entFilt.length+'','Entregables validados',          r_ent),
-    kpiCard('CONT·12', evidPend+'',       '0',              'Evidencias pendientes',          evidPend===0?'g':evidPend<=2?'a':'r'),
-    kpiCard('CONT·13', nAlertas+'',       '0',              'Alertas contractuales activas',  r_alert),
-    kpiCard('CONT·14', riesgoCert+'/'+certFilt.length,'0', 'Riesgo certificación/facturación',r_cert),
+    kpiCard('CONT·08', entProximos+'',    '0',              'Entregables próximos/en curso', entProximos<=1?'g':entProximos<=3?'a':'r'),
+    kpiCard('CONT·09', entValidados+'',   entFilt.length+'','Entregables validados',          r_ent),
+    kpiCard('CONT·10', evidPend+'',       '0',              'Evidencias pendientes',          evidPend===0?'g':evidPend<=2?'a':'r'),
+    kpiCard('CONT·11', nAlertas+'',       '0',              'Alertas contractuales activas',  r_alert),
+    kpiCard('CONT·12', riesgoCert+'/'+certFilt.length,'0', 'Riesgo certificación/facturación',r_cert),
   ];
 
   const showKpisEcon = showEcon || showHoras;
