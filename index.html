@@ -377,7 +377,7 @@
   .ind-legend span { color: var(--amber); font-weight: 700; }
 
   /* ── PROGRAMAS TRANSVERSALES ── */
-  .prog-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .prog-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
   .prog-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; }
   .prog-card-hdr {
     padding: 12px 16px; border-bottom: 1px solid var(--gray-100);
@@ -510,7 +510,7 @@
   .comm-row:last-child { border-bottom: none; }
   .comm-row.hdr { background: var(--gray-50); font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-500); pointer-events: none; }
   .cols-estrat  { grid-template-columns: 2fr 1.4fr 85px 130px 90px 85px; }
-  .cols-eventos { grid-template-columns: 1.8fr 90px 80px 78px 58px 68px 95px 1fr 72px; }
+  .cols-eventos { grid-template-columns: 1.8fr 90px 80px 78px 58px 68px 60px 60px 60px 1fr 72px; }
   .cols-program { grid-template-columns: 1.8fr 75px 75px 75px 75px 80px; }
   .ic-red::after { background: var(--red); }
   .ind-val.red { color: var(--red); }
@@ -969,19 +969,31 @@
         </div>
         <div class="batch-body">
           <div class="batch-kpis">
-            <div><div class="kpi-val ok">14</div><div class="kpi-lbl">Startups</div></div>
+            <div><div class="kpi-val ok">14</div><div class="kpi-lbl" title="~30 por centro/año">Startups participantes</div></div>
             <div><div class="kpi-val ok">93%</div><div class="kpi-lbl">Finalización</div></div>
             <div><div class="kpi-val ok">8.6</div><div class="kpi-lbl">Satisfacción</div></div>
             <div><div class="kpi-val ok">12</div><div class="kpi-lbl" title="mín. 10 por edición">Talleres · mín.10</div></div>
             <div><div class="kpi-val ok">10</div><div class="kpi-lbl" title="mín. 10 sesiones/startup">Sesiones/startup · mín.10</div></div>
           </div>
           <div class="prog-row">
-            <div class="prog-meta"><span>Horas talleres</span><strong>224 / 224 h</strong></div>
+            <div class="prog-meta"><span>Horas talleres edición</span><strong>224 / 224 h · 2h/taller</strong></div>
             <div class="prog-bar"><div class="prog-fill f-minsait" style="width:100%"></div></div>
           </div>
           <div class="prog-row">
-            <div class="prog-meta"><span>Horas mentoría</span><strong>268 / 280 h</strong></div>
+            <div class="prog-meta"><span>Horas mentoría edición</span><strong>268 / 280 h · 2h/sesión</strong></div>
             <div class="prog-bar"><div class="prog-fill f-minsait" style="width:96%"></div></div>
+          </div>
+          <div class="prog-row">
+            <div class="prog-meta"><span>Ediciones/año por centro</span><strong>2/año <span style="color:var(--green);font-family:var(--sans)">✓ B01 cerrado · B02 activo</span></strong></div>
+            <div class="prog-bar"><div class="prog-fill f-minsait" style="width:100%"></div></div>
+          </div>
+          <div class="prog-row">
+            <div class="prog-meta"><span>Horas talleres acumuladas año</span><strong>224 / 160 h obj.</strong></div>
+            <div class="prog-bar"><div class="prog-fill f-minsait" style="width:100%"></div></div>
+          </div>
+          <div class="prog-row">
+            <div class="prog-meta"><span>Horas mentoría acumuladas año</span><strong>268 / 2.400 h obj. red</strong></div>
+            <div class="prog-bar"><div class="prog-fill f-minsait" style="width:11%"></div></div>
           </div>
         </div>
         <button class="expand-btn" onclick="toggle('t1',this)">
@@ -1007,19 +1019,31 @@
         </div>
         <div class="batch-body">
           <div class="batch-kpis">
-            <div><div class="kpi-val act">12</div><div class="kpi-lbl">Startups</div></div>
+            <div><div class="kpi-val act">12</div><div class="kpi-lbl" title="~30 por centro/año">Startups participantes</div></div>
             <div><div class="kpi-val act">38%</div><div class="kpi-lbl">Avance</div></div>
             <div><div class="kpi-val">Sem 9</div><div class="kpi-lbl">de 24</div></div>
             <div><div class="kpi-val warn">5</div><div class="kpi-lbl" title="mín. 10 por edición">Talleres · mín.10</div></div>
             <div><div class="kpi-val warn">4</div><div class="kpi-lbl" title="mín. 10 sesiones/startup">Ses./startup · mín.10</div></div>
           </div>
           <div class="prog-row">
-            <div class="prog-meta"><span>Horas talleres</span><strong>84 / 224 h</strong></div>
+            <div class="prog-meta"><span>Horas talleres edición</span><strong>84 / 224 h · 2h/taller</strong></div>
             <div class="prog-bar"><div class="prog-fill f-minsait" style="width:38%"></div></div>
           </div>
           <div class="prog-row">
-            <div class="prog-meta"><span>Horas mentoría</span><strong>96 / 280 h</strong></div>
+            <div class="prog-meta"><span>Horas mentoría edición</span><strong>96 / 280 h · 2h/sesión</strong></div>
             <div class="prog-bar"><div class="prog-fill f-amber" style="width:34%"></div></div>
+          </div>
+          <div class="prog-row">
+            <div class="prog-meta"><span>Ediciones/año por centro</span><strong>2/año <span style="color:var(--amber);font-family:var(--sans)">B02 en curso (sem. 9/24)</span></strong></div>
+            <div class="prog-bar"><div class="prog-fill f-minsait" style="width:50%"></div></div>
+          </div>
+          <div class="prog-row">
+            <div class="prog-meta"><span>Horas talleres acumuladas año</span><strong>308 / 160 h obj.</strong></div>
+            <div class="prog-bar"><div class="prog-fill f-minsait" style="width:100%"></div></div>
+          </div>
+          <div class="prog-row">
+            <div class="prog-meta"><span>Horas mentoría acumuladas año</span><strong>364 / 2.400 h obj. red</strong></div>
+            <div class="prog-bar"><div class="prog-fill f-amber" style="width:15%"></div></div>
           </div>
         </div>
         <button class="expand-btn" onclick="toggle('t2',this)">
@@ -1101,11 +1125,21 @@
       <div class="prog-card">
         <div class="prog-card-hdr"><div class="prog-icon pi-ia">🔬</div><div class="prog-card-title">Innovación Abierta</div></div>
         <div>
-          <div class="pm-row"><span class="pm-lbl">Retos publicados</span><span class="pm-val">3 <span class="delta d-up">↑1</span></span></div>
-          <div class="pm-row"><span class="pm-lbl">Pilotos en ejecución</span><span class="pm-val">2</span></div>
-          <div class="pm-row"><span class="pm-lbl">Empresas tractoras activas</span><span class="pm-val">4</span></div>
-          <div class="pm-row"><span class="pm-lbl">Pilotos convertidos a contrato</span><span class="pm-val">1 <span class="delta d-up">↑</span></span></div>
-          <div class="pm-row"><span class="pm-lbl">PoC validadas</span><span class="pm-val">2</span></div>
+          <div class="pm-row"><span class="pm-lbl">Retos publicados (IA03)</span><span class="pm-val">3 <span class="delta d-up">↑1</span></span></div>
+          <div class="pm-row"><span class="pm-lbl">Pilotos en ejecución (IA04)</span><span class="pm-val">2</span></div>
+          <div class="pm-row"><span class="pm-lbl">Empresas tractoras activas</span><span class="pm-val"><strong>4</strong> <span class="delta d-ref">/ 6 obj.</span></span></div>
+          <div class="pm-row"><span class="pm-lbl">PoC validadas (IR03)</span><span class="pm-val">2</span></div>
+          <div class="pm-row"><span class="pm-lbl">Pilotos → contrato</span><span class="pm-val">1 <span class="delta d-up">↑</span></span></div>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-card-hdr"><div class="prog-icon" style="background:#fef9c3">⚡</div><div class="prog-card-title">Alto Rendimiento</div></div>
+        <div>
+          <div class="pm-row"><span class="pm-lbl">Consultorías ejecutadas período</span><span class="pm-val">6</span></div>
+          <div class="pm-row"><span class="pm-lbl">Duración media por consultoría</span><span class="pm-val">5h <span class="delta d-ref">obj. 4–8h</span></span></div>
+          <div class="pm-row"><span class="pm-lbl">Catálogo de líneas activas</span><span class="pm-val">3 <span class="delta d-ref">/ 4 obj.</span></span></div>
+          <div class="pm-row"><span class="pm-lbl">Horas bolsa consumidas</span><span class="pm-val">52 <span class="delta d-ref">/ 120 h asign.</span></span></div>
+          <div class="pm-row"><span class="pm-lbl">Startups atendidas</span><span class="pm-val">6 <span class="delta d-ref">/ 10 obj.</span></span></div>
         </div>
       </div>
       <div class="prog-card">
@@ -1174,7 +1208,7 @@
         </div>
         <div class="entregable-row">
           <div class="a-dot" style="background:var(--green)"></div>
-          <div class="e-name"><span class="e-id">E02</span> Propuesta nuevos Centros Misión</div>
+          <div class="e-name"><span class="e-id">E02bis</span> Propuesta nuevos Centros Misión</div>
           <div class="e-fecha">Entregado mes 3</div>
           <span class="e-estado es-rev">En revisión</span>
         </div>
@@ -1333,6 +1367,39 @@
         <div class="ind-val green">6<span style="font-size:14px;color:var(--gray-400)">/14</span></div>
         <div class="ind-obj">obj: 14</div>
         <div class="ind-lbl">Campañas activas/finalizadas</div>
+      </div>
+      <div class="ind-card ic-green">
+        <div class="ind-id">IA08a <span class="rag rag-g"></span></div>
+        <div class="ind-val green">4</div>
+        <div class="ind-obj">obj: ≥ 4 noticias/mes</div>
+        <div class="ind-lbl">Noticias publicadas en web</div>
+      </div>
+      <div class="ind-card ic-green">
+        <div class="ind-id">IA08b <span class="rag rag-g"></span></div>
+        <div class="ind-val green">27</div>
+        <div class="ind-obj">obj: ≥ 25 publicaciones/mes</div>
+        <div class="ind-lbl">Publicaciones en redes sociales</div>
+      </div>
+      <div class="ind-card ic-gray">
+        <div class="ind-id">IR09 <span class="rag rag-n"></span></div>
+        <div class="ind-val gray">142K</div>
+        <div class="ind-obj">★ impresiones/mes</div>
+        <div class="ind-lbl">Alcance digital <span class="ind-tag">★</span></div>
+        <div class="ind-legend">★ <span>Métricas propuestas</span>: impresiones · visitas · seguidores · engagement</div>
+      </div>
+      <div class="ind-card ic-gray">
+        <div class="ind-id">IR09·b <span class="rag rag-n"></span></div>
+        <div class="ind-val gray">5.9%</div>
+        <div class="ind-obj">★ obj. a validar SANDETEL</div>
+        <div class="ind-lbl">Tasa engagement RRSS <span class="ind-tag">★</span></div>
+        <div class="ind-legend">★ <span>A proponer</span> por adjudicatario</div>
+      </div>
+      <div class="ind-card ic-amber">
+        <div class="ind-id">IR09·c <span class="rag rag-a"></span></div>
+        <div class="ind-val amber">3.847</div>
+        <div class="ind-obj">★ obj. a validar SANDETEL</div>
+        <div class="ind-lbl">Seguidores / comunidad digital <span class="ind-tag">★</span></div>
+        <div class="ind-legend">★ <span>A proponer</span> por adjudicatario</div>
       </div>
     </div>
   </div>
@@ -1549,13 +1616,13 @@
       <div class="ind-card ic-amber">
         <div class="ind-id">VID·01 <span class="rag rag-a"></span></div>
         <div class="ind-val amber">11</div>
-        <div class="ind-obj">obj: 24</div>
+        <div class="ind-obj">obj: 1 vídeo / startup · 24 total</div>
         <div class="ind-lbl">Startups con vídeo producido</div>
       </div>
       <div class="ind-card ic-amber">
         <div class="ind-id">VID·02 <span class="rag rag-a"></span></div>
         <div class="ind-val amber">13</div>
-        <div class="ind-obj">pendiente</div>
+        <div class="ind-obj">obj: 0 pendientes</div>
         <div class="ind-lbl">Startups pendientes de vídeo</div>
       </div>
       <div class="ind-card ic-green">
@@ -1629,7 +1696,7 @@
     </div>
     <div class="comm-tbl">
       <div class="comm-row hdr cols-eventos">
-        <span>Evento / Acción</span><span>Nodo</span><span>Tipo</span><span style="text-align:center">Estado</span><span style="text-align:center">Inscritos</span><span style="text-align:center">Asistentes</span><span>Cobertura</span><span>Material producido</span><span style="text-align:center">Evidencia</span>
+        <span>Evento / Acción</span><span>Nodo</span><span>Tipo</span><span style="text-align:center">Estado</span><span style="text-align:center">Inscritos</span><span style="text-align:center">Asistentes</span><span style="text-align:center">Catering</span><span style="text-align:center">Med. téc.</span><span style="text-align:center">Decorac.</span><span>Material producido</span><span style="text-align:center">Evidencia</span>
       </div>
       <div class="comm-row cols-eventos">
         <span style="font-weight:500;color:var(--black)">Demo Day Gaming</span>
@@ -1638,7 +1705,9 @@
         <span style="text-align:center"><span class="pill pill-closed">OK</span></span>
         <span style="text-align:center;font-family:var(--mono)">280</span>
         <span style="text-align:center;font-family:var(--mono)">247</span>
-        <span><span class="badge bd-g">Prensa + SS</span></span>
+        <span style="text-align:center"><span class="badge bd-g">✓</span></span>
+        <span style="text-align:center"><span class="badge bd-g">✓</span></span>
+        <span style="text-align:center"><span class="badge bd-g">✓</span></span>
         <span style="color:var(--gray-500)">Roll-up, dossier, vídeo</span>
         <span style="text-align:center"><span class="badge bd-g">✓</span></span>
       </div>
@@ -1649,7 +1718,9 @@
         <span style="text-align:center"><span class="pill pill-closed">OK</span></span>
         <span style="text-align:center;font-family:var(--mono)">95</span>
         <span style="text-align:center;font-family:var(--mono)">82</span>
-        <span><span class="badge bd-g">Prensa local</span></span>
+        <span style="text-align:center"><span class="badge bd-g">✓</span></span>
+        <span style="text-align:center"><span class="badge bd-g">✓</span></span>
+        <span style="text-align:center"><span class="badge bd-a">Parc.</span></span>
         <span style="color:var(--gray-500)">Presentación, fotos</span>
         <span style="text-align:center"><span class="badge bd-g">✓</span></span>
       </div>
@@ -1660,7 +1731,9 @@
         <span style="text-align:center"><span class="pill pill-active">EN CURSO</span></span>
         <span style="text-align:center;font-family:var(--mono)">140</span>
         <span style="text-align:center;font-family:var(--mono)">—</span>
-        <span><span class="badge bd-a">En prep.</span></span>
+        <span style="text-align:center"><span class="badge bd-a">Pend.</span></span>
+        <span style="text-align:center"><span class="badge bd-a">Pend.</span></span>
+        <span style="text-align:center"><span class="badge bd-a">Pend.</span></span>
         <span style="color:var(--gray-500)">Pendiente</span>
         <span style="text-align:center"><span class="badge bd-a">Pend.</span></span>
       </div>
@@ -1671,7 +1744,9 @@
         <span style="text-align:center"><span class="pill pill-closed">OK</span></span>
         <span style="text-align:center;font-family:var(--mono)">120</span>
         <span style="text-align:center;font-family:var(--mono)">108</span>
-        <span><span class="badge bd-g">SS + web</span></span>
+        <span style="text-align:center"><span class="badge bd-g">✓</span></span>
+        <span style="text-align:center"><span class="badge bd-g">✓</span></span>
+        <span style="text-align:center"><span class="badge bd-g">✓</span></span>
         <span style="color:var(--gray-500)">Roll-up, nota de prensa</span>
         <span style="text-align:center"><span class="badge bd-g">✓</span></span>
       </div>
@@ -1682,7 +1757,9 @@
         <span style="text-align:center"><span class="pill pill-closed">OK</span></span>
         <span style="text-align:center;font-family:var(--mono)">+2.000</span>
         <span style="text-align:center;font-family:var(--mono)">1.840</span>
-        <span><span class="badge bd-g">Prensa nac.</span></span>
+        <span style="text-align:center"><span class="badge bd-g">✓</span></span>
+        <span style="text-align:center"><span class="badge bd-g">✓</span></span>
+        <span style="text-align:center"><span class="badge bd-g">✓</span></span>
         <span style="color:var(--gray-500)">Stand, catálogo, display</span>
         <span style="text-align:center"><span class="badge bd-g">✓</span></span>
       </div>
@@ -1693,9 +1770,56 @@
         <span style="text-align:center"><span class="pill pill-pending">Planificado</span></span>
         <span style="text-align:center;color:var(--gray-400)">—</span>
         <span style="text-align:center;color:var(--gray-400)">—</span>
-        <span style="color:var(--gray-400)">Pendiente plan</span>
+        <span style="text-align:center"><span class="badge" style="background:var(--gray-100);color:var(--gray-500)">—</span></span>
+        <span style="text-align:center"><span class="badge" style="background:var(--gray-100);color:var(--gray-500)">—</span></span>
+        <span style="text-align:center"><span class="badge" style="background:var(--gray-100);color:var(--gray-500)">—</span></span>
         <span style="color:var(--gray-400)">En preparación</span>
         <span style="text-align:center"><span class="badge" style="background:var(--gray-100);color:var(--gray-500)">—</span></span>
+      </div>
+    </div>
+    <!-- MATERIAL FÍSICO TRACKER -->
+    <div style="margin-top:14px">
+      <div class="section-head" style="margin-bottom:8px">
+        <div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-500)">Inventario de material promocional físico</div>
+        <div class="section-line"></div>
+        <div style="font-size:10px;color:var(--gray-400)">Stands · folletos · lonas · soportes expositivos</div>
+      </div>
+      <div class="comm-tbl">
+        <div class="comm-row hdr" style="grid-template-columns:2fr 90px 90px 90px 1fr 80px">
+          <span>Soporte</span><span style="text-align:center">Disponibles</span><span style="text-align:center">En uso</span><span style="text-align:center">En producción</span><span>Última actualización</span><span style="text-align:center">Estado</span>
+        </div>
+        <div class="comm-row" style="grid-template-columns:2fr 90px 90px 90px 1fr 80px">
+          <span style="font-weight:500;color:var(--black)">Stands modulares</span>
+          <span style="text-align:center;font-family:var(--mono)">4</span>
+          <span style="text-align:center;font-family:var(--mono)">1</span>
+          <span style="text-align:center;font-family:var(--mono)">0</span>
+          <span style="color:var(--gray-500)">Abr 2025</span>
+          <span style="text-align:center"><span class="badge bd-g">OK</span></span>
+        </div>
+        <div class="comm-row" style="grid-template-columns:2fr 90px 90px 90px 1fr 80px">
+          <span style="font-weight:500;color:var(--black)">Folletos / dossiers</span>
+          <span style="text-align:center;font-family:var(--mono)">340</span>
+          <span style="text-align:center;font-family:var(--mono)">—</span>
+          <span style="text-align:center;font-family:var(--mono)">200</span>
+          <span style="color:var(--gray-500)">May 2025 · pedido activo</span>
+          <span style="text-align:center"><span class="badge bd-a">Pend.</span></span>
+        </div>
+        <div class="comm-row" style="grid-template-columns:2fr 90px 90px 90px 1fr 80px">
+          <span style="font-weight:500;color:var(--black)">Lonas y roll-ups</span>
+          <span style="text-align:center;font-family:var(--mono)">8</span>
+          <span style="text-align:center;font-family:var(--mono)">2</span>
+          <span style="text-align:center;font-family:var(--mono)">0</span>
+          <span style="color:var(--gray-500)">Mar 2025</span>
+          <span style="text-align:center"><span class="badge bd-g">OK</span></span>
+        </div>
+        <div class="comm-row" style="grid-template-columns:2fr 90px 90px 90px 1fr 80px">
+          <span style="font-weight:500;color:var(--black)">Soportes expositivos</span>
+          <span style="text-align:center;font-family:var(--mono)">6</span>
+          <span style="text-align:center;font-family:var(--mono)">1</span>
+          <span style="text-align:center;font-family:var(--mono)">2</span>
+          <span style="color:var(--gray-500)">May 2025 · en producción</span>
+          <span style="text-align:center"><span class="badge bd-a">En prod.</span></span>
+        </div>
       </div>
     </div>
   </div>
@@ -1950,7 +2074,8 @@ const NODES = {
     programs: {
       ia:  { retos:3, pilotos:2, tractoras:4, poc:2, contratos:1 },
       inv: { plataforma:8, reuniones:48, foros:7, rondas:3, ir05:'—', ir06:1 },
-      com: { contactos:34, eventos:11, alianzas:22, socio:6, videos:8, totalSt:26 }
+      com: { contactos:34, eventos:11, alianzas:22, socio:6, videos:8, totalSt:26 },
+      alto: { consultoriasEjec:6, duracionMedia:'5h', lineas:3, horasConsumidas:52, horasTotal:120, startupsAtendidas:6 }
     },
     alerts: [
       { c:'amber', txt:'<strong>IA02 — Horas mentoría al 91%</strong><br>Batch 02/25 acumula retraso. Recuperar 18h antes de semana 16.', date:'Hoy' },
@@ -2054,7 +2179,8 @@ const NODES = {
     programs: {
       ia:  { retos:2, pilotos:1, tractoras:3, poc:1, contratos:0 },
       inv: { plataforma:6, reuniones:38, foros:5, rondas:2, ir05:'—', ir06:0 },
-      com: { contactos:28, eventos:9, alianzas:18, socio:5, videos:7, totalSt:24 }
+      com: { contactos:28, eventos:9, alianzas:18, socio:5, videos:7, totalSt:24 },
+      alto: { consultoriasEjec:4, duracionMedia:'6h', lineas:3, horasConsumidas:38, horasTotal:110, startupsAtendidas:4 }
     },
     alerts: [
       { c:'red',   txt:'<strong>IR07 — Satisfacción 7,9</strong><br>Por debajo del mínimo de 8,0. Plan de mejora requerido.', date:'Hoy' },
@@ -2158,7 +2284,8 @@ const NODES = {
     programs: {
       ia:  { retos:4, pilotos:3, tractoras:5, poc:3, contratos:2 },
       inv: { plataforma:11, reuniones:52, foros:8, rondas:4, ir05:'180.000 €', ir06:2 },
-      com: { contactos:42, eventos:13, alianzas:26, socio:7, videos:11, totalSt:29 }
+      com: { contactos:42, eventos:13, alianzas:26, socio:7, videos:11, totalSt:29 },
+      alto: { consultoriasEjec:9, duracionMedia:'5h', lineas:4, horasConsumidas:68, horasTotal:130, startupsAtendidas:8 }
     },
     alerts: [
       { c:'green', txt:'<strong>IR04 — 12 de 16 anuales</strong><br>Nodo más activo comercialmente de la red.', date:'May 2025' },
@@ -2262,7 +2389,8 @@ const NODES = {
     programs: {
       ia:  { retos:2, pilotos:2, tractoras:3, poc:1, contratos:0 },
       inv: { plataforma:7, reuniones:35, foros:5, rondas:2, ir05:'—', ir06:1 },
-      com: { contactos:24, eventos:8, alianzas:16, socio:4, videos:6, totalSt:22 }
+      com: { contactos:24, eventos:8, alianzas:16, socio:4, videos:6, totalSt:22 },
+      alto: { consultoriasEjec:3, duracionMedia:'7h', lineas:2, horasConsumidas:28, horasTotal:100, startupsAtendidas:3 }
     },
     alerts: [
       { c:'amber', txt:'<strong>IA01 — Horas talleres al 92%</strong><br>Batch 01/25 cerró con déficit. Plan de recuperación activo en B02.', date:'Hoy' },
@@ -2434,14 +2562,17 @@ function renderBatch(b, idx) {
     </div>
     <div class="batch-body">
       <div class="batch-kpis">
-        <div><div class="kpi-val ${isClosed?'ok':'act'}">${b.startups}</div><div class="kpi-lbl">Startups</div></div>
+        <div><div class="kpi-val ${isClosed?'ok':'act'}">${b.startups}</div><div class="kpi-lbl" title="~30 por centro/año">Startups participantes</div></div>
         <div><div class="kpi-val ${isClosed?'ok':'act'}">${b.finaliz}</div><div class="kpi-lbl">${isClosed?'Finalización':'Avance'}</div></div>
         <div><div class="kpi-val ${isClosed?'ok':''}">${b.satisf}</div><div class="kpi-lbl">${isClosed?'Satisfacción':'de 24 sem.'}</div></div>
         <div><div class="kpi-val ${tOk?'ok':'warn'}">${b.talleres}</div><div class="kpi-lbl">Talleres · mín.10</div></div>
         <div><div class="kpi-val ${sOk?'ok':'warn'}">${b.sesiones}</div><div class="kpi-lbl">Ses./startup · mín.10</div></div>
       </div>
-      <div class="prog-row"><div class="prog-meta"><span>Horas talleres</span><strong>${t[0]} / ${t[1]} h</strong></div><div class="prog-bar"><div class="prog-fill ${tPct>=95?'f-minsait':'f-amber'}" style="width:${tPct}%"></div></div></div>
-      <div class="prog-row"><div class="prog-meta"><span>Horas mentoría</span><strong>${m[0]} / ${m[1]} h</strong></div><div class="prog-bar"><div class="prog-fill ${mPct>=95?'f-minsait':'f-amber'}" style="width:${mPct}%"></div></div></div>
+      <div class="prog-row"><div class="prog-meta"><span>Horas talleres edición</span><strong>${t[0]} / ${t[1]} h · 2h/taller</strong></div><div class="prog-bar"><div class="prog-fill ${tPct>=95?'f-minsait':'f-amber'}" style="width:${tPct}%"></div></div></div>
+      <div class="prog-row"><div class="prog-meta"><span>Horas mentoría edición</span><strong>${m[0]} / ${m[1]} h · 2h/sesión</strong></div><div class="prog-bar"><div class="prog-fill ${mPct>=95?'f-minsait':'f-amber'}" style="width:${mPct}%"></div></div></div>
+      <div class="prog-row"><div class="prog-meta"><span>Ediciones/año por centro</span><strong>2/año <span style="color:${isClosed?'var(--green)':'var(--amber)'};font-family:var(--sans)">${isClosed?'Edición completada':'En curso'}</span></strong></div><div class="prog-bar"><div class="prog-fill ${isClosed?'f-minsait':'f-amber'}" style="width:${isClosed?100:50}%"></div></div></div>
+      <div class="prog-row"><div class="prog-meta"><span>Horas talleres acum. año (obj. 160h)</span><strong>${t[0]} h <span style="color:${t[0]>=160?'var(--green)':'var(--amber)'};font-family:var(--sans)">${t[0]>=160?'✓ Superado':'En progreso'}</span></strong></div><div class="prog-bar"><div class="prog-fill ${t[0]>=160?'f-minsait':'f-amber'}" style="width:${Math.min(Math.round(t[0]/160*100),100)}%"></div></div></div>
+      <div class="prog-row"><div class="prog-meta"><span>Horas mentoría acum. año (obj. 2.400h red)</span><strong>${m[0]} h nodo</strong></div><div class="prog-bar"><div class="prog-fill f-minsait" style="width:${Math.min(Math.round(m[0]/240*100),100)}%"></div></div></div>
     </div>
     <button class="expand-btn" onclick="toggleBatch('bt${idx}',this)">
       <span>Ver ${(b.startupList||[]).length} startups del batch</span><span class="chevron">▾</span>
@@ -2468,9 +2599,19 @@ function renderPrograms(p) {
       <div>
         <div class="pm-row"><span class="pm-lbl">Retos publicados (IA03)</span><span class="pm-val">${ia.retos}</span></div>
         <div class="pm-row"><span class="pm-lbl">Pilotos en ejecución (IA04)</span><span class="pm-val">${ia.pilotos}</span></div>
-        <div class="pm-row"><span class="pm-lbl">Empresas tractoras activas</span><span class="pm-val">${ia.tractoras}</span></div>
+        <div class="pm-row"><span class="pm-lbl">Empresas tractoras activas</span><span class="pm-val"><strong>${ia.tractoras}</strong> <span class="delta d-ref">/ 6 obj.</span></span></div>
         <div class="pm-row"><span class="pm-lbl">PoC validadas (IR03)</span><span class="pm-val">${ia.poc}</span></div>
         <div class="pm-row"><span class="pm-lbl">Pilotos → contrato</span><span class="pm-val">${ia.contratos}</span></div>
+      </div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-card-hdr"><div class="prog-icon" style="background:#fef9c3">⚡</div><div class="prog-card-title">Alto Rendimiento</div></div>
+      <div>
+        <div class="pm-row"><span class="pm-lbl">Consultorías ejecutadas período</span><span class="pm-val">${(p.alto||{}).consultoriasEjec||'—'}</span></div>
+        <div class="pm-row"><span class="pm-lbl">Duración media por consultoría</span><span class="pm-val">${(p.alto||{}).duracionMedia||'—'} <span class="delta d-ref">obj. 4–8h</span></span></div>
+        <div class="pm-row"><span class="pm-lbl">Catálogo de líneas activas</span><span class="pm-val">${(p.alto||{}).lineas||'—'} <span class="delta d-ref">/ 4 obj.</span></span></div>
+        <div class="pm-row"><span class="pm-lbl">Horas bolsa consumidas</span><span class="pm-val">${(p.alto||{}).horasConsumidas||'—'} <span class="delta d-ref">/ ${(p.alto||{}).horasTotal||'—'} h asign.</span></span></div>
+        <div class="pm-row"><span class="pm-lbl">Startups atendidas</span><span class="pm-val">${(p.alto||{}).startupsAtendidas||'—'} <span class="delta d-ref">/ 10 obj.</span></span></div>
       </div>
     </div>
     <div class="prog-card">
@@ -2796,12 +2937,12 @@ const COMM_PERIODOS = {
   mes:  { label:'Mes actual',         factor:0.09 },
 };
 const COMM_EVENTOS = [
-  { nombre:'Demo Day Gaming',                   nodo:'jaen',  tipo:'Demo Day',  estado:'ok',    inscritos:280,  asistentes:247,  cobertura:'Prensa + SS',   material:'Roll-up, dossier, vídeo',    evidencia:true,  canal:'eventos', programa:'acelera', periodo:'q1' },
-  { nombre:'Jornada inversión Agrotech',        nodo:'ejido', tipo:'Jornada',   estado:'ok',    inscritos:95,   asistentes:82,   cobertura:'Prensa local',  material:'Presentación, fotos',        evidencia:true,  canal:'eventos', programa:'invers',  periodo:'q1' },
-  { nombre:'Foro innov. abierta Log. Portuaria',nodo:'alg',   tipo:'Foro',      estado:'curso', inscritos:140,  asistentes:null, cobertura:'En prep.',      material:'Pendiente',                  evidencia:false, canal:'eventos', programa:'innov',   periodo:'q2' },
-  { nombre:'Encuentro Smart Mobility',          nodo:'alh',   tipo:'Encuentro', estado:'ok',    inscritos:120,  asistentes:108,  cobertura:'SS + web',      material:'Roll-up, nota de prensa',    evidencia:true,  canal:'eventos', programa:'comun',   periodo:'q1' },
-  { nombre:'Stand feria sectorial',             nodo:'all',   tipo:'Feria',     estado:'ok',    inscritos:2000, asistentes:1840, cobertura:'Prensa nac.',   material:'Stand, catálogo, display',   evidencia:true,  canal:'eventos', programa:'comm',    periodo:'q1' },
-  { nombre:'Demo Day Agrotech',                 nodo:'ejido', tipo:'Demo Day',  estado:'plan',  inscritos:null, asistentes:null, cobertura:'Pendiente plan',material:'En preparación',             evidencia:false, canal:'eventos', programa:'acelera', periodo:'q2' },
+  { nombre:'Demo Day Gaming',                   nodo:'jaen',  tipo:'Demo Day',  estado:'ok',    inscritos:280,  asistentes:247,  cobertura:'Prensa + SS',   material:'Roll-up, dossier, vídeo',    evidencia:true,  catering:true,  medtec:true,  decorac:true,  canal:'eventos', programa:'acelera', periodo:'q1' },
+  { nombre:'Jornada inversión Agrotech',        nodo:'ejido', tipo:'Jornada',   estado:'ok',    inscritos:95,   asistentes:82,   cobertura:'Prensa local',  material:'Presentación, fotos',        evidencia:true,  catering:true,  medtec:true,  decorac:'par', canal:'eventos', programa:'invers',  periodo:'q1' },
+  { nombre:'Foro innov. abierta Log. Portuaria',nodo:'alg',   tipo:'Foro',      estado:'curso', inscritos:140,  asistentes:null, cobertura:'En prep.',      material:'Pendiente',                  evidencia:false, catering:false, medtec:false, decorac:false, canal:'eventos', programa:'innov',   periodo:'q2' },
+  { nombre:'Encuentro Smart Mobility',          nodo:'alh',   tipo:'Encuentro', estado:'ok',    inscritos:120,  asistentes:108,  cobertura:'SS + web',      material:'Roll-up, nota de prensa',    evidencia:true,  catering:true,  medtec:true,  decorac:true,  canal:'eventos', programa:'comun',   periodo:'q1' },
+  { nombre:'Stand feria sectorial',             nodo:'all',   tipo:'Feria',     estado:'ok',    inscritos:2000, asistentes:1840, cobertura:'Prensa nac.',   material:'Stand, catálogo, display',   evidencia:true,  catering:true,  medtec:true,  decorac:true,  canal:'eventos', programa:'comm',    periodo:'q1' },
+  { nombre:'Demo Day Agrotech',                 nodo:'ejido', tipo:'Demo Day',  estado:'plan',  inscritos:null, asistentes:null, cobertura:'Pendiente plan',material:'En preparación',             evidencia:false, catering:null,  medtec:null,  decorac:null,  canal:'eventos', programa:'acelera', periodo:'q2' },
 ];
 const COMM_CAMPANYAS = [
   { programa:'acelera', label:'Aceleración',             campanyas:3, alcance:48000, leads:138, videos:5,    estado:'activo',   canal:'linkedin',   nodo:'all'   },
@@ -2898,9 +3039,9 @@ function renderCommunicationView() {
   // Render helpers
   const fmtN  = n => n >= 1000 ? (n >= 10000 ? Math.round(n/1000)+'K' : (n/1000).toFixed(1)+'K') : String(n);
   const ragOf = (v, o) => v / o >= 0.95 ? 'g' : v / o >= 0.75 ? 'a' : 'r';
-  const icCls = r => r === 'g' ? 'ic-green' : r === 'a' ? 'ic-amber' : 'ic-red';
-  const vcCls = r => r === 'g' ? 'green'    : r === 'a' ? 'amber'    : 'red';
-  const rdCls = r => r === 'g' ? 'rag-g'    : r === 'a' ? 'rag-a'    : 'rag-r';
+  const icCls = r => r === 'g' ? 'ic-green' : r === 'a' ? 'ic-amber' : r === 'n' ? 'ic-gray' : 'ic-red';
+  const vcCls = r => r === 'g' ? 'green'    : r === 'a' ? 'amber'    : r === 'n' ? 'gray'    : 'red';
+  const rdCls = r => r === 'g' ? 'rag-g'    : r === 'a' ? 'rag-a'    : r === 'n' ? 'rag-n'   : 'rag-r';
   const ragC  = (v, o) => { const r = ragOf(v, o); return `<span class="rag ${rdCls(r)}"></span>`; };
   const kpiCard = (id, val, obj, lbl, r) =>
     `<div class="ind-card ${icCls(r)}">
@@ -2935,6 +3076,11 @@ function renderCommunicationView() {
     { id:'COM·10', val:campFilt.filter(c=>c.estado==='activo').length+'/'+campFilt.length,
                    obj:campFilt.length||14,  lbl:'Campañas activas/finalizadas',
                    r:campFilt.filter(c=>c.estado==='activo').length > 0 ? 'g' : 'a', canales:['all'], progs:['all'] },
+    { id:'IA08a',  val:Math.round(4*nodFactor),  obj:'≥ 4/mes',  lbl:'Noticias publicadas en web',       r:Math.round(4*nodFactor)>=4?'g':'r', canales:['web','all'], progs:['all'] },
+    { id:'IA08b',  val:Math.round(27*nodFactor), obj:'≥ 25/mes', lbl:'Publicaciones en redes sociales',  r:Math.round(27*nodFactor)>=25?'g':'a', canales:['linkedin','instagram','all'], progs:['all'] },
+    { id:'IR09·a', val:fmtN(kpiAlcance),         obj:'★ a proponer', lbl:'Alcance digital (impresiones) ★', r:'n', canales:['all'], progs:['all'] },
+    { id:'IR09·b', val:(5.9*(nodFactor<1?nodFactor:1)).toFixed(1)+'%', obj:'★ a proponer', lbl:'Engagement RRSS ★', r:'n', canales:['all'], progs:['all'] },
+    { id:'IR09·c', val:Math.round(3847*alcFactor).toLocaleString('es-ES'), obj:'★ a proponer', lbl:'Comunidad digital ★', r:'n', canales:['all'], progs:['all'] },
   ];
   const kpiMatchCanal = k => k.canales.includes('all') || k.canales.includes(canal) || canal === 'all';
   const kpiMatchProg  = k => k.progs.includes('all')   || k.progs.includes(programa) || programa === 'all';
@@ -3070,8 +3216,8 @@ function renderCommunicationView() {
 
   // Startups KPIs
   const stKpisHTML =
-    kpiCard('VID·01', kpiVidP,         kpiVidT, 'Startups con vídeo producido', r09) +
-    kpiCard('VID·02', kpiVidT-kpiVidP, kpiVidT, 'Startups pendientes de vídeo', kpiVidP<kpiVidT?'a':'g') +
+    kpiCard('VID·01', kpiVidP+'/'+kpiVidT, '1/startup', 'Startups con vídeo producido', r09) +
+    kpiCard('VID·02', kpiVidT-kpiVidP, 0,           'Startups pendientes de vídeo', kpiVidP<kpiVidT?'a':'g') +
     kpiCard('VID·03', Math.max(0,Math.round(kpiVidP*0.82)), kpiVidP, 'Vídeos validados por dirección', 'g') +
     kpiCard('VID·04', mn(7,nodFactor),  mn(8,nodFactor)||1, 'Casos de éxito publicados', 'g') +
     kpiCard('VID·05', mn(3,nodFactor)||0, 4, 'Material audiovisual Centros Misión', 'a') +
@@ -3097,6 +3243,7 @@ function renderCommunicationView() {
   const evPill  = e => e==='ok'?'<span class="pill pill-closed">OK</span>':e==='curso'?'<span class="pill pill-active">EN CURSO</span>':'<span class="pill pill-pending">Planificado</span>';
   const tipoF   = t => ({Demo_Day:'f1',Jornada:'f2',Foro:'f3',Feria:'fc',Encuentro:'f1'})[t.replace(' ','_')]||'f1';
   const nodoLbl = {ejido:'El Ejido',jaen:'Jaén',alg:'Algeciras',alh:'Alhaurín',all:'Transversal'};
+  const chk  = v => v === true ? '<span class="badge bd-g">✓</span>' : v === 'par' ? '<span class="badge bd-a">Parc.</span>' : v === false ? '<span class="badge bd-a">Pend.</span>' : '<span class="badge" style="background:var(--gray-100);color:var(--gray-500)">—</span>';
   const evHTML  = evFilt.length === 0
     ? '<div style="padding:20px;text-align:center;color:var(--gray-400);font-size:12px">Sin eventos para los filtros seleccionados</div>'
     : evFilt.map(e =>
@@ -3107,7 +3254,9 @@ function renderCommunicationView() {
           <span style="text-align:center">${evPill(e.estado)}</span>
           <span style="text-align:center;font-family:var(--mono)">${e.inscritos!=null?e.inscritos.toLocaleString('es-ES'):'—'}</span>
           <span style="text-align:center;font-family:var(--mono)">${e.asistentes!=null?e.asistentes.toLocaleString('es-ES'):'—'}</span>
-          <span>${e.cobertura}</span>
+          <span style="text-align:center">${chk(e.catering)}</span>
+          <span style="text-align:center">${chk(e.medtec)}</span>
+          <span style="text-align:center">${chk(e.decorac)}</span>
           <span style="color:var(--gray-500)">${e.material}</span>
           <span style="text-align:center">${e.evidencia?'<span class="badge bd-g">✓</span>':'<span class="badge bd-a">Pend.</span>'}</span>
         </div>`).join('');
@@ -3239,8 +3388,18 @@ function renderCommunicationView() {
     <div>
       <div class="section-head"><div class="section-num">6</div><div class="section-title">Eventos, Demo Days y material físico</div><div class="section-line"></div></div>
       <div class="comm-tbl">
-        <div class="comm-row hdr cols-eventos"><span>Evento / Acción</span><span>Nodo</span><span>Tipo</span><span style="text-align:center">Estado</span><span style="text-align:center">Inscritos</span><span style="text-align:center">Asistentes</span><span>Cobertura</span><span>Material</span><span style="text-align:center">Evidencia</span></div>
+        <div class="comm-row hdr cols-eventos"><span>Evento / Acción</span><span>Nodo</span><span>Tipo</span><span style="text-align:center">Estado</span><span style="text-align:center">Inscritos</span><span style="text-align:center">Asistentes</span><span style="text-align:center">Catering</span><span style="text-align:center">Med. téc.</span><span style="text-align:center">Decorac.</span><span>Material producido</span><span style="text-align:center">Evidencia</span></div>
         ${evHTML}
+      </div>
+      <div style="margin-top:14px">
+        <div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-500);margin-bottom:6px">Inventario de material promocional físico — Stands · folletos · lonas · soportes expositivos</div>
+        <div class="comm-tbl">
+          <div class="comm-row hdr" style="grid-template-columns:2fr 90px 90px 90px 1fr 80px"><span>Soporte</span><span style="text-align:center">Disponibles</span><span style="text-align:center">En uso</span><span style="text-align:center">En producción</span><span>Última actualización</span><span style="text-align:center">Estado</span></div>
+          <div class="comm-row" style="grid-template-columns:2fr 90px 90px 90px 1fr 80px"><span style="font-weight:500;color:var(--black)">Stands modulares</span><span style="text-align:center;font-family:var(--mono)">4</span><span style="text-align:center;font-family:var(--mono)">1</span><span style="text-align:center;font-family:var(--mono)">0</span><span style="color:var(--gray-500)">Abr 2025</span><span style="text-align:center"><span class="badge bd-g">OK</span></span></div>
+          <div class="comm-row" style="grid-template-columns:2fr 90px 90px 90px 1fr 80px"><span style="font-weight:500;color:var(--black)">Folletos / dossiers</span><span style="text-align:center;font-family:var(--mono)">340</span><span style="text-align:center;font-family:var(--mono)">—</span><span style="text-align:center;font-family:var(--mono)">200</span><span style="color:var(--gray-500)">May 2025 · pedido activo</span><span style="text-align:center"><span class="badge bd-a">Pend.</span></span></div>
+          <div class="comm-row" style="grid-template-columns:2fr 90px 90px 90px 1fr 80px"><span style="font-weight:500;color:var(--black)">Lonas y roll-ups</span><span style="text-align:center;font-family:var(--mono)">8</span><span style="text-align:center;font-family:var(--mono)">2</span><span style="text-align:center;font-family:var(--mono)">0</span><span style="color:var(--gray-500)">Mar 2025</span><span style="text-align:center"><span class="badge bd-g">OK</span></span></div>
+          <div class="comm-row" style="grid-template-columns:2fr 90px 90px 90px 1fr 80px"><span style="font-weight:500;color:var(--black)">Soportes expositivos</span><span style="text-align:center;font-family:var(--mono)">6</span><span style="text-align:center;font-family:var(--mono)">1</span><span style="text-align:center;font-family:var(--mono)">2</span><span style="color:var(--gray-500)">May 2025 · en producción</span><span style="text-align:center"><span class="badge bd-a">En prod.</span></span></div>
+        </div>
       </div>
     </div>
 
@@ -3306,7 +3465,7 @@ const SC_MATRIZ = {
 // Entregables contractuales
 const SC_ENTREGABLES = [
   { id:'E02',    nombre:'Metodología detallada',           period:'Día 30',       fecha:'30 ene 2025', estado:'validado', validacion:'ok',  evidencias:'ok',  impacto:'OK',                     centro:'all', prog:'all'    },
-  { id:'E02', nombre:'Nuevos Centros Misión',           period:'Mes 3',        fecha:'28 feb 2025', estado:'validado', validacion:'ok',  evidencias:'ok',  impacto:'Cerrado',                centro:'all', prog:'all'    },
+  { id:'E02bis', nombre:'Nuevos Centros Misión',           period:'Mes 3',        fecha:'28 feb 2025', estado:'validado', validacion:'ok',  evidencias:'ok',  impacto:'Cerrado',                centro:'all', prog:'all'    },
   { id:'E03',    nombre:'Informe mensual de actividad',    period:'Mensual',      fecha:'30 may 2025', estado:'en-curso', validacion:'pen', evidencias:'pen', impacto:'Próximo hito',           centro:'all', prog:'all'    },
   { id:'E04',    nombre:'Informe trimestral seguimiento',  period:'Trimestral',   fecha:'30 jun 2025', estado:'planif',   validacion:'pen', evidencias:'pen', impacto:'Pendiente batch',        centro:'all', prog:'all'    },
   { id:'E05',    nombre:'Progreso de startups',            period:'Cierre edición',fecha:'Jul 2025',   estado:'en-curso', validacion:'pen', evidencias:'par', impacto:'Facturación condicionada',centro:'all',prog:'acelera'},
