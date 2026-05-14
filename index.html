@@ -760,7 +760,6 @@
 
 <!-- SCREEN TABS -->
 <div class="screen-tabs">
-  <button class="screen-tab" data-tab="resumen">Resumen Ejecutivo</button>
   <button class="screen-tab active" data-tab="nodos">Nodos</button>
   <button class="screen-tab" data-tab="comunicacion">Comunicación</button>
   <button class="screen-tab" data-tab="seguimiento">Seguimiento Contractual</button>
@@ -873,7 +872,13 @@
       <option value="territorial">Comparativa territorial</option>
     </select>
   </div>
-  <button class="filter-reset" onclick="resetCommunicationFilters()">↺ Restablecer</button>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+    <button class="filter-reset" style="margin-left:0" onclick="resetCommunicationFilters()">↺ Restablecer filtros</button>
+    <button class="download-btn" id="download-btn-comm" onclick="downloadReportComm()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Descargar informe
+    </button>
+  </div>
 </div>
 
 <!-- SEGUIMIENTO CONTRACTUAL FILTER BAR -->
@@ -913,7 +918,13 @@
       <option value="alertas">Alertas</option>
     </select>
   </div>
-  <button class="filter-reset" onclick="resetSeguimientoFilters()">↺ Restablecer</button>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+    <button class="filter-reset" style="margin-left:0" onclick="resetSeguimientoFilters()">↺ Restablecer filtros</button>
+    <button class="download-btn" id="download-btn-sc" onclick="downloadReportSC()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Descargar informe
+    </button>
+  </div>
 </div>
 
 <!-- SEGUIMIENTO CONTRACTUAL CONTENT -->
@@ -3973,6 +3984,317 @@ function downloadReport() {
   document.getElementById('print-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 
+  btn.classList.remove('loading');
+  btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Descargar informe';
+}
+
+function generateReportCommHTML() {
+  const now     = new Date().toLocaleDateString('es-ES', { day:'2-digit', month:'long', year:'numeric' });
+  const nodoKey = (document.getElementById('cf-nodo')    || {}).value || 'all';
+  const perKey  = (document.getElementById('cf-periodo') || {}).value || 'year';
+  const nd  = COMM_NODOS[nodoKey]   || COMM_NODOS.all;
+  const pd  = COMM_PERIODOS[perKey] || COMM_PERIODOS.year;
+  const f   = pd.factor;
+  const RC  = { green:'#059669', amber:'#d97706', red:'#dc2626' };
+  const RB  = { green:'#d1fae5', amber:'#fef3c7', red:'#fee2e2' };
+
+  // KPI summary row
+  const kpiRow = (lbl, val, obj, ok) => `
+    <tr style="border-bottom:1px solid #f3f4f6">
+      <td style="padding:5px 10px;font-size:11px;color:#6b7280">${lbl}</td>
+      <td style="padding:5px 10px;font-size:12px;font-family:monospace;font-weight:700;text-align:center;color:${ok?'#059669':'#d97706'}">${val}</td>
+      <td style="padding:5px 10px;font-size:10px;color:#9ca3af;text-align:center">${obj}</td>
+    </tr>`;
+
+  const fmtN = n => n >= 1000 ? (n/1000).toFixed(0)+'K' : n;
+  const acc  = Math.round(nd.acciones * f);
+  const alc  = Math.round(nd.alcance  * f);
+
+  const kpiRows = [
+    kpiRow('Acciones de comunicación', acc,                      'mín. 22/período',   acc >= 22),
+    kpiRow('Alcance estimado',         fmtN(alc),                'mín. 30.000',       alc >= 30000),
+    kpiRow('Eventos realizados',       nd.eventos,               'según plan',        nd.eventos >= 4),
+    kpiRow('Vídeos startups',          nd.vidP+'/'+nd.vidT,      '100% del total',    nd.vidP/nd.vidT >= 0.5),
+    kpiRow('Leads captados',           Math.round(nd.leads*f),   'mín. 100',          Math.round(nd.leads*f) >= 100),
+    kpiRow('Comunidad activa',         nd.comunidad.toLocaleString('es-ES'), 'mín. 300', nd.comunidad >= 300),
+  ].join('');
+
+  // Campañas table
+  const campRows = COMM_CAMPANYAS.map(c => `
+    <tr style="border-bottom:1px solid #f3f4f6">
+      <td style="padding:5px 10px;font-size:11px;font-weight:500;color:#111">${c.label}</td>
+      <td style="padding:5px 10px;font-size:11px;text-align:center;font-family:monospace">${c.campanyas}</td>
+      <td style="padding:5px 10px;font-size:11px;text-align:center;font-family:monospace">${fmtN(c.alcance)}</td>
+      <td style="padding:5px 10px;font-size:11px;text-align:center;font-family:monospace">${c.leads||'—'}</td>
+      <td style="padding:5px 10px;font-size:11px;text-align:center;font-family:monospace">${c.videos||'—'}</td>
+      <td style="padding:5px 10px;text-align:center">
+        <span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:${c.estado==='activo'?'#f9f2f5':'#d1fae5'};color:${c.estado==='activo'?'#5a1535':'#059669'}">${c.estado}</span>
+      </td>
+    </tr>`).join('');
+
+  // Alertas
+  const alertRows = COMM_ALERTAS.map(a => {
+    const col = RC[a.c] || RC.amber;
+    const bg  = RB[a.c] || RB.amber;
+    const txt = a.txt.replace(/<[^>]*>/g, '');
+    return `<tr>
+      <td style="padding:5px 8px;width:8px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${col}"></span></td>
+      <td style="padding:5px 8px;font-size:11px;color:#374151">${txt}</td>
+      <td style="padding:5px 8px;font-size:10px;color:#9ca3af;white-space:nowrap">${a.date}</td>
+    </tr>`;
+  }).join('');
+
+  // Entregables
+  const estLbl = e => e==='ok'?{t:'Validado',c:'#059669',b:'#d1fae5'}:e==='pen'?{t:'Pendiente',c:'#d97706',b:'#fef3c7'}:{t:'En revisión',c:'#2563eb',b:'#dbeafe'};
+  const entRows = COMM_ENTREGABLES.map(e => {
+    const s = estLbl(e.estado);
+    return `<tr style="border-bottom:1px solid #f3f4f6">
+      <td style="padding:5px 8px;font-size:11px;font-family:monospace;font-weight:600;color:#5a1535">${e.id}</td>
+      <td style="padding:5px 8px;font-size:11px;color:#374151">${e.nombre}</td>
+      <td style="padding:5px 8px;font-size:10px;color:#6b7280;white-space:nowrap">${e.fecha}</td>
+      <td style="padding:5px 8px;text-align:center"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:${s.b};color:${s.c}">${s.t}</span></td>
+    </tr>`;
+  }).join('');
+
+  return `
+    <div style="font-family:'Helvetica Neue',Arial,sans-serif;color:#111;max-width:760px;margin:0 auto;padding:24px">
+      <div style="background:#111;padding:14px 20px;border-radius:6px;display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <div style="color:white;font-size:15px;font-weight:600;letter-spacing:.02em">MINSAIT · THE CUBE</div>
+        <div style="color:rgba(255,255,255,.7);font-size:11px">Proyecto Misión · Lote 2 · EXPT 25-00158</div>
+        <div style="color:rgba(255,255,255,.7);font-size:11px">${now}</div>
+      </div>
+      <div style="border:2px solid #5a1535;border-radius:8px;padding:16px 20px;margin-bottom:20px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5a1535;margin-bottom:4px">Programa Transversal · Comunicación y Visibilidad</div>
+        <div style="font-size:20px;font-weight:700;color:#111;margin-bottom:8px">Comunicación y Visibilidad — Proyecto Misión</div>
+        <div style="display:flex;gap:16px;font-size:11px;color:#6b7280;margin-bottom:10px">
+          <span>Nodo: ${nd.label}</span><span>·</span><span>Período: ${pd.label}</span>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:#d1fae5;border:1px solid #6ee7b7;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:#059669">
+          <span style="width:8px;height:8px;border-radius:50%;background:#059669;display:inline-block"></span>EN CURSO · OK
+        </div>
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#374151;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #5a1535">KPIs de Comunicación — ${pd.label}</div>
+        <table style="width:100%;border-collapse:collapse">
+          <thead><tr style="background:#f9f2f5">
+            <th style="padding:6px 10px;text-align:left;font-size:10px;color:#5a1535;font-weight:700">MÉTRICA</th>
+            <th style="padding:6px 10px;text-align:center;font-size:10px;color:#5a1535;font-weight:700">VALOR</th>
+            <th style="padding:6px 10px;text-align:center;font-size:10px;color:#5a1535;font-weight:700">OBJETIVO</th>
+          </tr></thead>
+          <tbody>${kpiRows}</tbody>
+        </table>
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#374151;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #5a1535">Campañas por Programa</div>
+        <table style="width:100%;border-collapse:collapse">
+          <thead><tr style="background:#f9f2f5">
+            <th style="padding:5px 10px;text-align:left;font-size:10px;color:#5a1535;font-weight:700">PROGRAMA</th>
+            <th style="padding:5px 10px;text-align:center;font-size:10px;color:#5a1535;font-weight:700">CAMPAÑAS</th>
+            <th style="padding:5px 10px;text-align:center;font-size:10px;color:#5a1535;font-weight:700">ALCANCE</th>
+            <th style="padding:5px 10px;text-align:center;font-size:10px;color:#5a1535;font-weight:700">LEADS</th>
+            <th style="padding:5px 10px;text-align:center;font-size:10px;color:#5a1535;font-weight:700">VÍDEOS</th>
+            <th style="padding:5px 10px;text-align:center;font-size:10px;color:#5a1535;font-weight:700">ESTADO</th>
+          </tr></thead>
+          <tbody>${campRows}</tbody>
+        </table>
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#374151;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #5a1535">Alertas Activas</div>
+        <table style="width:100%;border-collapse:collapse"><tbody>${alertRows}</tbody></table>
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#374151;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #5a1535">Entregables y Evidencias</div>
+        <table style="width:100%;border-collapse:collapse">
+          <thead><tr style="background:#f9f2f5">
+            <th style="padding:5px 8px;text-align:left;font-size:10px;color:#5a1535;font-weight:700">ID</th>
+            <th style="padding:5px 8px;text-align:left;font-size:10px;color:#5a1535;font-weight:700">ENTREGABLE</th>
+            <th style="padding:5px 8px;text-align:left;font-size:10px;color:#5a1535;font-weight:700">FECHA</th>
+            <th style="padding:5px 8px;text-align:center;font-size:10px;color:#5a1535;font-weight:700">ESTADO</th>
+          </tr></thead>
+          <tbody>${entRows}</tbody>
+        </table>
+      </div>
+      <div style="border-top:1px solid #e5e7eb;padding-top:12px;margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:10px;color:#9ca3af">Cuadro de Mando · Proyecto Misión · Lote 2 · EXPT 25-00158 · SANDETEL / ADA</div>
+        <div style="font-size:10px;color:#9ca3af">Generado: ${now}</div>
+      </div>
+    </div>`;
+}
+
+function generateReportSCHTML() {
+  const now    = new Date().toLocaleDateString('es-ES', { day:'2-digit', month:'long', year:'numeric' });
+  const centro = (document.getElementById('sc-centro') || {}).value || 'all';
+  const perKey = (document.getElementById('sc-periodo')|| {}).value || 'year';
+  const pd  = SC_PERIODOS[perKey] || SC_PERIODOS.year;
+  const f   = pd.f !== undefined ? pd.f : pd.factor;
+  const cf  = { all:1, ejido:0.27, jaen:0.31, alg:0.22, alh:0.20 }[centro] || 1;
+  const centroLabel = { all:'Todos los centros', ejido:'Agrotech · El Ejido', jaen:'Gaming y Contenidos · Jaén', alg:'Logística Portuaria · Algeciras', alh:'Smart Mobility · Alhaurín' }[centro];
+
+  const eur  = n => n >= 1000000 ? (n/1000000).toFixed(2)+'M€' : Math.round(n).toLocaleString('es-ES')+'€';
+  const fmtH = n => Math.round(n).toLocaleString('es-ES')+'h';
+  const pct  = (e,p) => p > 0 ? Math.round(e/p*100)+'%' : '—';
+  const RC   = { green:'#059669', amber:'#d97706', red:'#dc2626' };
+  const RB   = { green:'#d1fae5', amber:'#fef3c7', red:'#fee2e2' };
+  const ragOf= (v,o) => v/o >= 0.95 ? 'g' : v/o >= 0.75 ? 'a' : 'r';
+  const ragC = r => r==='g'?'#059669':r==='a'?'#d97706':'#dc2626';
+  const ragB = r => r==='g'?'#d1fae5':r==='a'?'#fef3c7':'#fee2e2';
+
+  // Presupuesto
+  const presFilt = SC_PRESUPUESTO.filter(x => centro === 'all' || x.centro === 'all' || x.centro === centro);
+  const presRows = presFilt.map(p => {
+    const ej = Math.round(p.ejec * cf * f);
+    const pl = Math.round(p.prev * cf * f);
+    const r  = ragOf(ej, pl);
+    return `<tr style="border-bottom:1px solid #f3f4f6">
+      <td style="padding:5px 10px;font-size:11px;font-weight:500;color:#111">${p.label}</td>
+      <td style="padding:5px 10px;font-size:11px;font-family:monospace;text-align:right">${eur(pl)}</td>
+      <td style="padding:5px 10px;font-size:11px;font-family:monospace;text-align:right">${eur(ej)}</td>
+      <td style="padding:5px 10px;text-align:center"><span style="font-size:11px;font-weight:700;font-family:monospace;padding:2px 7px;border-radius:4px;background:${ragB(r)};color:${ragC(r)}">${pct(ej,pl)}</span></td>
+    </tr>`;
+  }).join('');
+
+  // Horas
+  const horasFilt = SC_HORAS.filter(x => centro === 'all' || x.centro === 'all' || x.centro === centro);
+  const horasRows = horasFilt.map(h => {
+    const ej = Math.round(h.imp * cf * f);
+    const pl = Math.round(h.plan * cf * f);
+    const r  = ragOf(ej, pl);
+    return `<tr style="border-bottom:1px solid #f3f4f6">
+      <td style="padding:5px 10px;font-size:11px;font-weight:500;color:#111">${h.perfil}</td>
+      <td style="padding:5px 10px;font-size:11px;font-family:monospace;text-align:right">${fmtH(pl)}</td>
+      <td style="padding:5px 10px;font-size:11px;font-family:monospace;text-align:right">${fmtH(ej)}</td>
+      <td style="padding:5px 10px;text-align:center"><span style="font-size:11px;font-weight:700;font-family:monospace;padding:2px 7px;border-radius:4px;background:${ragB(r)};color:${ragC(r)}">${pct(ej,pl)}</span></td>
+    </tr>`;
+  }).join('');
+
+  // Entregables
+  const estLbl = e => e==='validado'?{t:'Validado',c:'#059669',b:'#d1fae5'}:e==='en-curso'?{t:'En curso',c:'#2563eb',b:'#dbeafe'}:e==='amber'?{t:'Riesgo',c:'#d97706',b:'#fef3c7'}:e==='planif'?{t:'Planif.',c:'#6b7280',b:'#f3f4f6'}:{t:'No inic.',c:'#9ca3af',b:'#f9fafb'};
+  const entRows = SC_ENTREGABLES.map(e => {
+    const s = estLbl(e.estado);
+    return `<tr style="border-bottom:1px solid #f3f4f6">
+      <td style="padding:5px 8px;font-size:11px;font-family:monospace;font-weight:600;color:#5a1535">${e.id}</td>
+      <td style="padding:5px 8px;font-size:11px;color:#374151">${e.nombre}</td>
+      <td style="padding:5px 8px;font-size:10px;color:#6b7280">${e.period}</td>
+      <td style="padding:5px 8px;font-size:10px;color:#6b7280;white-space:nowrap">${e.fecha}</td>
+      <td style="padding:5px 8px;text-align:center"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:${s.b};color:${s.c}">${s.t}</span></td>
+    </tr>`;
+  }).join('');
+
+  // Certificaciones
+  const certRows = SC_CERT.map(c => {
+    const esOk = c.estado === 'validada';
+    const esRev= c.estado === 'revision';
+    const col  = esOk ? '#059669' : esRev ? '#2563eb' : '#d97706';
+    const bg   = esOk ? '#d1fae5' : esRev ? '#dbeafe' : '#fef3c7';
+    return `<tr style="border-bottom:1px solid #f3f4f6">
+      <td style="padding:5px 10px;font-size:11px;font-weight:500;color:#111">${c.mes}</td>
+      <td style="padding:5px 10px;font-size:11px;font-family:monospace;text-align:right">${eur(c.importe)}</td>
+      <td style="padding:5px 10px;text-align:center"><span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:${bg};color:${col}">${c.estado}</span></td>
+      <td style="padding:5px 10px;font-size:11px;color:#6b7280">${c.incidencias}</td>
+    </tr>`;
+  }).join('');
+
+  // Alertas
+  const alertRows = SC_ALERTAS.map(a => {
+    const col = RC[a.c] || RC.amber;
+    const txt = a.txt.replace(/<[^>]*>/g, '');
+    return `<tr>
+      <td style="padding:5px 8px;width:8px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${col}"></span></td>
+      <td style="padding:5px 8px;font-size:11px;color:#374151">${txt}</td>
+      <td style="padding:5px 8px;font-size:10px;color:#9ca3af;white-space:nowrap">${a.date}</td>
+    </tr>`;
+  }).join('');
+
+  return `
+    <div style="font-family:'Helvetica Neue',Arial,sans-serif;color:#111;max-width:760px;margin:0 auto;padding:24px">
+      <div style="background:#111;padding:14px 20px;border-radius:6px;display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <div style="color:white;font-size:15px;font-weight:600;letter-spacing:.02em">MINSAIT · THE CUBE</div>
+        <div style="color:rgba(255,255,255,.7);font-size:11px">Proyecto Misión · Lote 2 · EXPT 25-00158</div>
+        <div style="color:rgba(255,255,255,.7);font-size:11px">${now}</div>
+      </div>
+      <div style="border:2px solid #5a1535;border-radius:8px;padding:16px 20px;margin-bottom:20px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5a1535;margin-bottom:4px">Seguimiento Contractual · EXPT 25-00158</div>
+        <div style="font-size:20px;font-weight:700;color:#111;margin-bottom:8px">Seguimiento Contractual — Proyecto Misión</div>
+        <div style="display:flex;gap:16px;font-size:11px;color:#6b7280;margin-bottom:10px">
+          <span>Centro: ${centroLabel}</span><span>·</span><span>Período: ${pd.label}</span>
+        </div>
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#374151;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #5a1535">Ejecución Presupuestaria</div>
+        <table style="width:100%;border-collapse:collapse">
+          <thead><tr style="background:#f9f2f5">
+            <th style="padding:6px 10px;text-align:left;font-size:10px;color:#5a1535;font-weight:700">PROGRAMA</th>
+            <th style="padding:6px 10px;text-align:right;font-size:10px;color:#5a1535;font-weight:700">PLANIFICADO</th>
+            <th style="padding:6px 10px;text-align:right;font-size:10px;color:#5a1535;font-weight:700">EJECUTADO</th>
+            <th style="padding:6px 10px;text-align:center;font-size:10px;color:#5a1535;font-weight:700">% EJE.</th>
+          </tr></thead>
+          <tbody>${presRows}</tbody>
+        </table>
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#374151;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #5a1535">Imputación de Horas</div>
+        <table style="width:100%;border-collapse:collapse">
+          <thead><tr style="background:#f9f2f5">
+            <th style="padding:6px 10px;text-align:left;font-size:10px;color:#5a1535;font-weight:700">PERFIL</th>
+            <th style="padding:6px 10px;text-align:right;font-size:10px;color:#5a1535;font-weight:700">PLANIFICADAS</th>
+            <th style="padding:6px 10px;text-align:right;font-size:10px;color:#5a1535;font-weight:700">EJECUTADAS</th>
+            <th style="padding:6px 10px;text-align:center;font-size:10px;color:#5a1535;font-weight:700">% EJE.</th>
+          </tr></thead>
+          <tbody>${horasRows}</tbody>
+        </table>
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#374151;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #5a1535">Entregables Contractuales</div>
+        <table style="width:100%;border-collapse:collapse">
+          <thead><tr style="background:#f9f2f5">
+            <th style="padding:5px 8px;text-align:left;font-size:10px;color:#5a1535;font-weight:700">ID</th>
+            <th style="padding:5px 8px;text-align:left;font-size:10px;color:#5a1535;font-weight:700">ENTREGABLE</th>
+            <th style="padding:5px 8px;text-align:left;font-size:10px;color:#5a1535;font-weight:700">PERIODICIDAD</th>
+            <th style="padding:5px 8px;text-align:left;font-size:10px;color:#5a1535;font-weight:700">FECHA</th>
+            <th style="padding:5px 8px;text-align:center;font-size:10px;color:#5a1535;font-weight:700">ESTADO</th>
+          </tr></thead>
+          <tbody>${entRows}</tbody>
+        </table>
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#374151;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #5a1535">Certificaciones</div>
+        <table style="width:100%;border-collapse:collapse">
+          <thead><tr style="background:#f9f2f5">
+            <th style="padding:5px 10px;text-align:left;font-size:10px;color:#5a1535;font-weight:700">MES</th>
+            <th style="padding:5px 10px;text-align:right;font-size:10px;color:#5a1535;font-weight:700">IMPORTE</th>
+            <th style="padding:5px 10px;text-align:center;font-size:10px;color:#5a1535;font-weight:700">ESTADO</th>
+            <th style="padding:5px 10px;text-align:left;font-size:10px;color:#5a1535;font-weight:700">INCIDENCIAS</th>
+          </tr></thead>
+          <tbody>${certRows}</tbody>
+        </table>
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#374151;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #5a1535">Alertas Contractuales</div>
+        <table style="width:100%;border-collapse:collapse"><tbody>${alertRows}</tbody></table>
+      </div>
+      <div style="border-top:1px solid #e5e7eb;padding-top:12px;margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:10px;color:#9ca3af">Cuadro de Mando · Proyecto Misión · Lote 2 · EXPT 25-00158 · SANDETEL / ADA</div>
+        <div style="font-size:10px;color:#9ca3af">Generado: ${now}</div>
+      </div>
+    </div>`;
+}
+
+function downloadReportComm() {
+  const btn = document.getElementById('download-btn-comm');
+  btn.classList.add('loading');
+  document.getElementById('print-report').innerHTML = generateReportCommHTML();
+  document.getElementById('print-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  btn.classList.remove('loading');
+  btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Descargar informe';
+}
+
+function downloadReportSC() {
+  const btn = document.getElementById('download-btn-sc');
+  btn.classList.add('loading');
+  document.getElementById('print-report').innerHTML = generateReportSCHTML();
+  document.getElementById('print-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
   btn.classList.remove('loading');
   btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Descargar informe';
 }
